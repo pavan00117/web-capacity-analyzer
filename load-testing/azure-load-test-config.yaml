@@ -1,0 +1,31 @@
+version: v0.1
+testId: web-capacity-analyzer-service
+displayName: Smart Web Application Capacity Analyzer
+description: Staged concurrency test (10 -> 25 -> 50 -> 100 VUs) measuring response time SLA and compute bottlenecks
+
+testPlan: test-plan.jmx
+engineInstances: 1
+
+# Target application base URL (Override via environment or pipeline parameter)
+env:
+  - name: APP_BASE_URL
+    value: https://tourist-capacity-demo.azurewebsites.net
+  - name: HEALTH_ENDPOINT
+    value: /api/health
+  - name: PLACES_ENDPOINT
+    value: /api/tourist-places
+  - name: HOMESTAYS_ENDPOINT
+    value: /api/homestays
+  - name: SEARCH_ENDPOINT
+    value: /api/search?q=hyderabad
+
+# Pass / Fail criteria for automated gating
+failureCriteria:
+  - avg(response_time_ms) > 1000
+  - error() > 5.0
+  - p95(response_time_ms) > 2000
+
+# Automated test stop rules if target experiences failure cascade
+autoStop:
+  errorPercentage: 20
+  timeWindow: 30

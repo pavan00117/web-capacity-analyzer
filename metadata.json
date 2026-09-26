@@ -1,0 +1,6 @@
+{
+  "name": "Web Capacity Analyzer",
+  "description": "Smart Web Application Capacity Analyzer using Azure Load Testing - evaluate concurrent user thresholds, performance metrics, and bottleneck diagnosis for cloud apps.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
