@@ -5,7 +5,10 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+    ],
 
     resolve: {
       alias: {
@@ -14,17 +17,17 @@ export default defineConfig(() => {
     },
 
     server: {
-      // Allow Azure App Service hostname
+      // Azure App Service hostname
       allowedHosts: [
-        'rg-capacity-hackathon-d6fbdbeqg4dncam.centralindia-01.azurewebsites.net',
+        'rg-capacity-hackathon-d6fbdbeqg4dncmam.centralindia-01.azurewebsites.net',
       ],
 
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
+      // AI Studio / local development settings
       hmr: process.env.DISABLE_HMR !== 'true',
 
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      watch: process.env.DISABLE_HMR === 'true'
+        ? null
+        : {},
     },
   };
 });
